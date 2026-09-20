@@ -1,0 +1,19 @@
+PIXLOOM — CREDITS
+
+Project:
+PixLoom — Video ⇄ Stills
+
+Author / Developer:
+Quang Tri Nguyen
+
+Description:
+PixLoom is a free, browser-based tool for extracting still frames from video and composing still images into video. Processing is performed locally in the user's browser.
+
+Credit:
+PixLoom by Quang Tri Nguyen
+
+Copyright:
+© 2026 Quang Tri Nguyen. All rights reserved.
+
+Additional note:
+PixLoom processes media locally in the browser and does not upload user files to a server.

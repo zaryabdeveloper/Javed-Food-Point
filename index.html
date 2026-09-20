@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Javed Food Point – Best Burgers, Pizza & Fast Food. Order instantly on WhatsApp!"/>
+<title>Javed Food Point 🍔 | Karachi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="hero.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <span class="tick-item"><span class="tick-dot"></span>🍔 Aaj Ka Offer: Zinger Burger + Fries + Drink = Rs.599 Only!</span>
+      <span class="tick-item"><span class="tick-dot"></span>🍕 Large Pizza + Garlic Bread = Rs.999 | Limited Time!</span>
+      <span class="tick-item"><span class="tick-dot"></span>🛵 Free Delivery on Orders Above Rs.1000!</span>
+      <span class="tick-item"><span class="tick-dot"></span>📱 WhatsApp Order = 10% Extra Discount!</span>
+      <span class="tick-item"><span class="tick-dot"></span>👨‍👩‍👧‍👦 Family Deal: 4 Burgers + 2 Pizzas = Rs.2299!</span>
+      <span class="tick-item"><span class="tick-dot"></span>🍔 Aaj Ka Offer: Zinger Burger + Fries + Drink = Rs.599 Only!</span>
+      <span class="tick-item"><span class="tick-dot"></span>🍕 Large Pizza + Garlic Bread = Rs.999 | Limited Time!</span>
+      <span class="tick-item"><span class="tick-dot"></span>🛵 Free Delivery on Orders Above Rs.1000!</span>
+      <span class="tick-item"><span class="tick-dot"></span>📱 WhatsApp Order = 10% Extra Discount!</span>
+      <span class="tick-item"><span class="tick-dot"></span>👨‍👩‍👧‍👦 Family Deal: 4 Burgers + 2 Pizzas = Rs.2299!</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="brand" href="#">
+        <div class="brand-icon"><img src="img/ChatGPT Image May 6, 2026, 02_54_50 PM.png" alt="" height="80px" width="85px" loading="lazy"></div>
+        <div>
+          <div class="brand-text">JAVED <span>FOOD</span></div>
+          <span class="brand-sub">Point • Est. 2010</span>
+        </div>
+      </a>
+
+      <!-- Hamburger -->
+      <button class="ham-btn d-lg-none" id="hamBtn" aria-expanded="false" aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
+
+      <!-- Nav menu -->
+      <div class="nav-menu" id="navMenu">
+        <button class="nav-close d-lg-none" id="navClose">✕</button>
+        <a href="#hero" class="active" data-nav>Home</a>
+        <a href="#deals" data-nav>Deals</a>
+        <a href="#menu" data-nav>Menu</a>
+        <a href="#about" data-nav>About</a>
+        <a href="#reviews" data-nav>Reviews</a>
+        <a href="#contact" data-nav>Contact</a>
+        <a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20I%20want%20to%20order%20%F0%9F%8D%94" target="_blank" class="btn-nav-wa">
+          <svg class="wa-svg-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Now
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero-pin-container" aria-label="Hero: Javed Food Point">
+  <div class="hero-stage">
+    
+    <!-- Cinematic Canvas Backdrop -->
+    <div class="hero-canvas-wrapper">
+      <canvas id="hero-canvas" role="img" aria-label="Javed Food Point Double Smash Burger 101-frame assembly animation"></canvas>
+      <div class="hero-canvas-overlay"></div>
+      <div class="hero-glow-1"></div>
+      <div class="hero-glow-2"></div>
+    </div>
+
+    <!-- Hero Content Layer -->
+    <div class="hero-content-layer">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Text & CTAs Column -->
+          <div class="hero-text-col">
+            <div class="hero-header-block">
+              <div class="hero-label">
+                <span class="hero-label-dot"></span> Pakistan's Favourite Fast Food
+              </div>
+              <h1 class="hero-title">
+                <span class="line-orange">EAT BIG,</span>
+                <span class="line-yellow">LIVE BOLD</span>
+                <span class="line-white">PAY LESS!</span>
+              </h1>
+              <p class="hero-desc">
+                Ghar baithe mast khana! Javed Food Point ke fresh burgers, hot pizzas aur crispy fries — sirf ek WhatsApp message door. Abhi order karein!
+              </p>
+            </div>
+            <div class="hero-actions-block">
+              <div class="cta-group">
+                <a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20Menu%20dikhayein%20aur%20order%20karna%20hai%20%F0%9F%8D%94" target="_blank" class="btn-wa-hero" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  <span>WhatsApp Par Order Karein</span>
+                </a>
+                <a href="#menu" class="btn-menu-hero">
+                  🍽️ Menu Dekhein
+                </a>
+              </div>
+              <div class="hero-stats">
+                <div class="hstat">
+                  <span class="n" data-count="8000">0</span>
+                  <span class="l">Happy Customers</span>
+                </div>
+                <div class="hstat">
+                  <span class="n" data-count="50">0</span>
+                  <span class="l">Menu Items</span>
+                </div>
+                <div class="hstat">
+                  <span class="n" data-count="14">0</span>
+                  <span class="l">Years Serving</span>
+                </div>
+                <div class="hstat">
+                  <span class="n" data-count="4.9">0</span>
+                  <span class="l">⭐ Rating</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Column: Floating Badges & Live Status -->
+       
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-blocking preloader indicator -->
+    <div class="hero-loader-hint" id="heroLoaderHint" aria-live="polite">
+      <div class="hero-loader-spinner"></div>
+      <span>Loading sequence... <b id="heroLoadPct">0%</b></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- RIBBON -->
+<div id="ribbon">
+  <div class="ribbon-track">
+    <span class="ribbon-item">🍔 DOUBLE SMASH BURGER</span>
+    <span class="ribbon-item">🍕 LOADED PIZZA</span>
+    <span class="ribbon-item">🍟 CRISPY FRIES</span>
+    <span class="ribbon-item">🌮 DEAL OF THE DAY</span>
+    <span class="ribbon-item">🧃 FRESH DRINKS</span>
+    <span class="ribbon-item">📦 FAMILY BOX</span>
+    <span class="ribbon-item">🍗 CRISPY BROAST</span>
+    <span class="ribbon-item">🔥 SIZZLING DEALS</span>
+    <span class="ribbon-item">🍔 DOUBLE SMASH BURGER</span>
+    <span class="ribbon-item">🍕 LOADED PIZZA</span>
+    <span class="ribbon-item">🍟 CRISPY FRIES</span>
+    <span class="ribbon-item">🌮 DEAL OF THE DAY</span>
+    <span class="ribbon-item">🧃 FRESH DRINKS</span>
+    <span class="ribbon-item">📦 FAMILY BOX</span>
+    <span class="ribbon-item">🍗 CRISPY BROAST</span>
+    <span class="ribbon-item">🔥 SIZZLING DEALS</span>
+  </div>
+</div>
+
+<!-- DEALS -->
+<section id="deals">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="sec-tag">🔥 Hot Deals</span>
+      <h2 class="sec-title">Aaj Ki <span>Khas Deals</span></h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="row g-4">
+
+      <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="0">
+        <div class="deal-card">
+          <span class="deal-badge-hot">🔥 Best Seller</span>
+          <div class="deal-img" style="background:linear-gradient(135deg,#1a0800,#5c1a00);"><img src="img/deal-1.png" alt="" width="300x" height="200px" loading="lazy"></div>
+          <div class="deal-body">
+            <h5>Javed Special Combo</h5>
+            <p>2 Zinger Burgers + 2 Fries + 1.5L Drink — bilkul tasty aur filling!</p>
+          </div>
+          <div class="deal-footer">
+            <div>
+              <span class="price-main">Rs.999</span>
+              <span class="price-old">Rs.1,500</span>
+            </div>
+            <a href="https://wa.me/923001234567?text=Hi!%20Mujhe%20Javed%20Special%20Combo%20chahiye%20Rs.999" target="_blank" class="btn-order-wa">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="80">
+        <div class="deal-card">
+          <span class="deal-badge-hot">👨‍👩‍👧‍👦 Family</span>
+          <span class="deal-badge-new">SAVE 40%</span>
+          <div class="deal-img" style="background:linear-gradient(135deg,#1a1000,#4a2e00);"><img src="img/deal-2.png" alt="" width="300x" height="200px" loading="lazy"></div>
+          <div class="deal-body">
+            <h5>Family Feast Box</h5>
+            <p>2 Large Pizzas + 4 Burgers + 4 Fries + 2 Drinks — poora ghar khush!</p>
+          </div>
+          <div class="deal-footer">
+            <div>
+              <span class="price-main">Rs.2,299</span>
+              <span class="price-old">Rs.3,800</span>
+            </div>
+            <a href="https://wa.me/923001234567?text=Hi!%20Mujhe%20Family%20Feast%20Box%20chahiye%20Rs.2299" target="_blank" class="btn-order-wa">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="160">
+        <div class="deal-card">
+          <span class="deal-badge-hot">💑 Couple</span>
+          <div class="deal-img" style="background:linear-gradient(135deg,#1a0005,#5c001a);"><img src="img/deal-3.png" alt="" width="300x" height="200px" loading="lazy"></div>
+          <div class="deal-body">
+            <h5>Couple Deal</h5>
+            <p>1 Medium Pizza + 2 Burgers + 2 Cold Drinks — pyaar ke saath khayein!</p>
+          </div>
+          <div class="deal-footer">
+            <div>
+              <span class="price-main">Rs.849</span>
+              <span class="price-old">Rs.1,300</span>
+            </div>
+            <a href="https://wa.me/923001234567?text=Hi!%20Mujhe%20Couple%20Deal%20chahiye%20Rs.849" target="_blank" class="btn-order-wa">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3" data-aos="zoom-in" data-aos-delay="240">
+        <div class="deal-card">
+          <span class="deal-badge-hot">⭐ Value</span>
+          <span class="deal-badge-new">NEW</span>
+          <div class="deal-img" style="background:linear-gradient(135deg,#00180d,#004d2e);"><img src="img/deal-4.png" alt="" width="300x" height="200px" loading="lazy"></div>
+          <div class="deal-body">
+            <h5>Broast Bucket</h5>
+            <p>8 Pcs Crispy Broast + 4 Fries + 4 Drinks — sab ka favourite!</p>
+          </div>
+          <div class="deal-footer">
+            <div>
+              <span class="price-main">Rs.1,599</span>
+              <span class="price-old">Rs.2,400</span>
+            </div>
+            <a href="https://wa.me/923001234567?text=Hi!%20Mujhe%20Broast%20Bucket%20chahiye%20Rs.1599" target="_blank" class="btn-order-wa">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="sec-tag">Our Menu</span>
+      <h2 class="sec-title">Hamara <span>Zabardast</span> Menu</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="filter-row" data-aos="fade-up" data-aos-delay="100">
+      <button class="fbtn active" data-f="all">Sab Kuch</button>
+      <button class="fbtn" data-f="burger">🍔 Burgers</button>
+      <button class="fbtn" data-f="pizza">🍕 Pizza</button>
+      <button class="fbtn" data-f="broast">🍗 Broast</button>
+      <button class="fbtn" data-f="sides">🍟 Sides</button>
+      <button class="fbtn" data-f="drinks">🥤 Drinks</button>
+    </div>
+    <div class="row g-4" id="mgrid">
+
+      <!-- Burgers -->
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="burger" data-aos="fade-up" data-aos-delay="0">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#2d0e00,#5c1a00);"><img src="img/special-burger1.png" alt=""  width="300x" height="200px" loading="lazy"> <span class="avail">✅ Available</span><span class="spicy">🌶️ Spicy</span></div>
+          <div class="m-body"><h6>Javed Special Burger</h6><p>Double patty, extra cheese, secret sauce — signature taste!</p></div>
+          <div class="m-footer"><span class="m-price">Rs.399</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Javed%20Special%20Burger" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="burger" data-aos="fade-up" data-aos-delay="50">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#1a0800,#4a2200);"><img src="img/Zinger-burger2.png" alt=""  width="300x" height="200px" loading="lazy"><span class="avail">✅ Available</span></div>
+          <div class="m-body"><h6>Zinger Burger</h6><p>Crispy chicken fillet, lettuce, cheese & mayo sauce</p></div>
+          <div class="m-footer"><span class="m-price">Rs.299</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Zinger%20Burger" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="burger" data-aos="fade-up" data-aos-delay="100">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#2a1000,#6a2800);"><img src="img/tikka-burger3.png" alt=""  width="300x" height="200px" loading="lazy"><span class="avail">✅ Available</span><span class="spicy">🌶️ Spicy</span></div>
+          <div class="m-body"><h6>Tikka Burger</h6><p>Desi tikka style with green chutney & coleslaw</p></div>
+          <div class="m-footer"><span class="m-price">Rs.329</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Tikka%20Burger" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pizza -->
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="pizza" data-aos="fade-up" data-aos-delay="0">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#1a0800,#4a1200);"><img src="img/Pizza4.png" alt=""  width="300x" height="200px" loading="lazy"><span class="avail">✅ Available</span></div>
+          <div class="m-body"><h6>Javed Special Pizza</h6><p>Chicken, pepperoni, veggies & double cheese load</p></div>
+          <div class="m-footer"><span class="m-price">Rs.899</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Javed%20Special%20Pizza" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="pizza" data-aos="fade-up" data-aos-delay="50">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#001a0a,#004a1f);"><img src="img/Pizza5.png" alt=""  width="300x" height="200px" loading="lazy"><span class="avail">✅ Available</span></div>
+          <div class="m-body"><h6>BBQ Chicken Pizza</h6><p>Smoky BBQ, juicy chicken strips & mozzarella</p></div>
+          <div class="m-footer"><span class="m-price">Rs.799</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20BBQ%20Chicken%20Pizza" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Broast -->
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="broast" data-aos="fade-up" data-aos-delay="0">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#1a0f00,#4a2e00);"><img src="img/Broast7.png" alt=""  width="300x" height="200px" loading="lazy"> <span class="avail">✅ Available</span><span class="spicy">🌶️ Spicy</span></div>
+          <div class="m-body"><h6>Crispy Broast (2 Pcs)</h6><p>Golden crispy broasted chicken with garlic dip</p></div>
+          <div class="m-footer"><span class="m-price">Rs.399</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Crispy%20Broast" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sides -->
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="sides" data-aos="fade-up" data-aos-delay="0">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#1a1200,#4a3400);"><img src="img/FRies7.png" alt=""  width="300x" height="200px " loading="lazy"><span class="avail">✅ Available</span></div>
+          <div class="m-body"><h6>Loaded Fries</h6><p>Crispy fries + cheese sauce + jalapenos</p></div>
+          <div class="m-footer"><span class="m-price">Rs.249</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Loaded%20Fries" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drinks -->
+      <div class="col-6 col-md-4 col-lg-3 mi" data-c="drinks" data-aos="fade-up" data-aos-delay="0">
+        <div class="m-card">
+          <div class="m-img" style="background:linear-gradient(135deg,#1a0000,#4a0000);"><img src="img/Cold drinks8.png" alt=""  width="300x" height="200px" loading="lazy"><span class="avail">✅ Available</span></div>
+          <div class="m-body"><h6>Cold Drink (1.5L)</h6><p>Pepsi / 7UP / Mirinda — ice cold aur fresh!</p></div>
+          <div class="m-footer"><span class="m-price">Rs.149</span>
+            <a href="https://wa.me/923001234567?text=I%20want%20Cold%20Drink" target="_blank" class="btn-order-wa" style="font-size:.72rem;padding:8px 14px;">
+              <svg class="wa-icon-sm" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.608-.867.608-.867.4-.074-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /mgrid -->
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="sec-tag" style="color:var(--yellow)">Why Javed Food Point?</span>
+      <h2 class="sec-title" style="color:#fff">Hum Kyun <span style="color:var(--yellow)">Behtareen</span> Hain?</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="0"><div class="why-card"><div class="why-icon">✅</div><h5>100% Halal</h5><p>Certified halal, safe for everyone</p></div></div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="60"><div class="why-card"><div class="why-icon">🛵</div><h5>30-Min Delivery</h5><p>Hot food at your door, fast!</p></div></div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="120"><div class="why-card"><div class="why-icon">💰</div><h5>Best Prices</h5><p>Quality khana, sasti qeemat</p></div></div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="180"><div class="why-card"><div class="why-icon">👨‍🍳</div><h5>Fresh Daily</h5><p>Koi frozen nahi, roz fresh</p></div></div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="240"><div class="why-card"><div class="why-icon">📱</div><h5>Easy WhatsApp</h5><p>1-click order, koi app nahi</p></div></div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="300"><div class="why-card"><div class="why-icon">⭐</div><h5>4.9 Stars</h5><p>8000+ satisfied customers</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WA CTA -->
+<section id="wacta">
+  <div class="container">
+    <div class="wa-box" data-aos="zoom-in">
+      <span class="wa-mega-icon">💬</span>
+      <h2>ORDER KAR, ABHI AUR AGAR!</h2>
+      <p>Sirf ek WhatsApp message bhejein — order batayein, address share karein, aur garam khana aap ke darwaze par! No app download, no registration, no waiting.</p>
+      <a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20Mujhe%20order%20karna%20hai%20%F0%9F%8D%94%20Please%20menu%20share%20karein." target="_blank" class="btn-wa-cta">
+        <svg style="width:26px;height:26px;fill:#25D366;flex-shrink:0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Par Order Karein
+      </a>
+      <div class="wa-steps">
+        <div class="wa-step"><span class="step-n">1</span> Message bhejein</div>
+        <div class="wa-step"><span class="step-n">2</span> Menu choose karein</div>
+        <div class="wa-step"><span class="step-n">3</span> Address confirm karein</div>
+        <div class="wa-step"><span class="step-n">4</span> 🍔 Enjoy karein!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="sec-tag">Customer Love</span>
+      <h2 class="sec-title">Customers <span>Kya Kehte</span> Hain</h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="rev-card">
+          <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="rev-text">Javed Special Burger bilkul zabardast hai! Cheese itna tha ke sab aahaa karte reh gaye. WhatsApp pe order kiya, 25 minutes mein delivery ho gayi — koi jhanjhat nahi!</p>
+          <div class="rev-user"><div class="rev-av">AK</div><div><div class="rev-name">Ahmed Khan</div><div class="rev-loc">📍 Karachi, North Nazimabad</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="rev-card">
+          <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="rev-text">Family Feast Deal ekdum sahi hai — poora ghar khush ho gaya. Itna khana itni sasti qeemat mein! Ab har weekend yahan se he order karte hain hum!</p>
+          <div class="rev-user"><div class="rev-av">SR</div><div><div class="rev-name">Sadia Rehman</div><div class="rev-loc">📍 Lahore, Gulberg</div></div></div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="rev-card">
+          <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="rev-text">Broast bilkul crispy aur juicy tha andar se! Aur WhatsApp order process itna asaan tha — ek message aur kaam ho gaya. Highly recommend karta hoon yaar!</p>
+          <div class="rev-user"><div class="rev-av">MU</div><div><div class="rev-name">Muhammad Usman</div><div class="rev-loc">📍 Rawalpindi</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5" data-aos="zoom-in">
+        <div class="about-img-box">
+          <div class="about-circle"><img src="img/Juicy-B.png" alt=""  width="300x" height="200px" loading="lazy"></div>
+          <div class="about-badge ab1">⭐ 4.9 Rating</div>
+          <div class="about-badge ab2">🏆 Since 2010</div>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left">
+        <span class="sec-tag">Our Story</span>
+        <h2 class="sec-title">Javed <span>Food Point</span> Ka Safar</h2>
+        <div class="sec-bar left"></div>
+        <p style="color:#555;line-height:1.8;margin-bottom:16px;font-size:.92rem;">
+          2010 mein ek choti si dukaan se shuroo hua yeh safar aaj Pakistan ke best fast food brands mein shamil ho chuka hai. Javed sahab ka ek hi sapna tha — ghar jaisi taazgi aur bahar jaisa swad, aur wo bhi sasti qeemat mein.
+        </p>
+        <p style="color:#555;line-height:1.8;margin-bottom:28px;font-size:.92rem;">
+          Humara wada hai: 100% halal ingredients, roz fresh khana, aur customers ki khushi humari pehli priority. 8000+ khush customers aur 14 saal ke tajurbe ke saath, hum aaj bhi usi dum ke saath khidmat mein hain!
+        </p>
+        <div class="row g-3 mb-28">
+          <div class="col-6">
+            <div style="background:var(--cream);border-radius:12px;padding:18px;text-align:center;border-left:3px solid var(--red);">
+              <div style="font-family:'Bebas Neue',cursive;font-size:2rem;color:var(--red);">14+</div>
+              <div style="font-size:.75rem;font-weight:700;color:#777;text-transform:uppercase;letter-spacing:1px;">Years of Experience</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--cream);border-radius:12px;padding:18px;text-align:center;border-left:3px solid var(--orange);">
+              <div style="font-family:'Bebas Neue',cursive;font-size:2rem;color:var(--orange);">8K+</div>
+              <div style="font-size:.75rem;font-weight:700;color:#777;text-transform:uppercase;letter-spacing:1px;">Happy Customers</div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20Order%20karna%20hai." target="_blank" class="btn-wa-hero" style="display:inline-flex;margin-top:20px;">
+          <svg style="width:18px;height:18px;fill:#fff;flex-shrink:0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Abhi Order Karein
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="text-center" data-aos="fade-up">
+      <span class="sec-tag">Rabta</span>
+      <h2 class="sec-title">Hamse <span>Milein</span></h2>
+      <div class="sec-bar"></div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="row g-3">
+          <div class="col-12" data-aos="fade-right" data-aos-delay="0">
+            <div class="c-card">
+              <div class="c-icon">💬</div>
+              <h6>WhatsApp Order</h6>
+              <a href="https://wa.me/923001234567" target="_blank" style="color:var(--green);font-weight:800;">+92 300 1234567</a>
+              <p style="font-size:.75rem;color:var(--green);margin-top:4px;">✅ Usually replies in 5 minutes</p>
+            </div>
+          </div>
+          <div class="col-12" data-aos="fade-right" data-aos-delay="80">
+            <div class="c-card">
+              <div class="c-icon">📞</div>
+              <h6>Call Karein</h6>
+              <a href="tel:+923001234567">+92 300 1234567</a><br>
+              <a href="tel:+922137000000">+92 21 3700-0000</a>
+            </div>
+          </div>
+          <div class="col-12" data-aos="fade-right" data-aos-delay="160">
+            <div class="c-card">
+              <div class="c-icon">📍</div>
+              <h6>Location</h6>
+              <p>Shop #5, Main Food Street, Block-B, Gulshan-e-Iqbal, Karachi</p>
+              <p style="font-size:.75rem;color:var(--green);margin-top:4px;">⏰ Open Daily: 11 AM – 2 AM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+        <div style="background:var(--cream);border-radius:var(--r);padding:32px;box-shadow:0 4px 20px rgba(0,0,0,.06);">
+          <h5 style="font-family:'Bebas Neue',cursive;color:var(--dark);font-size:1.5rem;letter-spacing:1.5px;margin-bottom:20px;">📩 MESSAGE BHEJEIN</h5>
+          <div class="contact-form">
+            <div class="row g-0">
+              <div class="col-md-6 pe-md-2"><input type="text" class="fc" placeholder="Aapka Naam *"/></div>
+              <div class="col-md-6 ps-md-2"><input type="tel" class="fc" placeholder="WhatsApp Number *"/></div>
+              <div class="col-12">
+                <select class="fc" style="appearance:none;">
+                  <option>Order Inquiry</option>
+                  <option>Complaint / Feedback</option>
+                  <option>Bulk / Corporate Order</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <textarea class="fc" rows="4" placeholder="Apna message likhein..."></textarea>
+              </div>
+              <div class="col-12">
+                <button class="btn-submit" onclick="sendWA(this)">
+                  <svg style="width:18px;height:18px;fill:#fff;flex-shrink:0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp Par Send Karein
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="0">
+        <div class="f-brand-txt">JAVED <span>FOOD POINT</span></div>
+        <p class="f-desc">Pakistan ka trusted fast food — fresh ingredients, zabardast taste, fast WhatsApp ordering. 14 saal se khidmat mein, hamesha aap ke liye! 🇵🇰</p>
+        <div class="socials">
+          <a href="#" class="soc" title="Facebook">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="soc" title="Instagram">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/923001234567" target="_blank" class="soc" title="WhatsApp" style="border-color:var(--green);color:var(--green);">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          <a href="#" class="soc" title="TikTok">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 col-6" data-aos="fade-up" data-aos-delay="80">
+        <div class="f-head">Quick Links</div>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#deals">Hot Deals</a></li>
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 col-6" data-aos="fade-up" data-aos-delay="160">
+        <div class="f-head">Menu</div>
+        <ul>
+          <li><a href="#menu">Burgers</a></li>
+          <li><a href="#menu">Pizzas</a></li>
+          <li><a href="#menu">Broast</a></li>
+          <li><a href="#menu">Fries & Sides</a></li>
+          <li><a href="#menu">Drinks</a></li>
+          <li><a href="#deals">Deals</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="240">
+        <div class="f-head">Order Karein</div>
+        <a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20Mujhe%20order%20karna%20hai." target="_blank" class="f-wa-card">
+          <svg width="28" height="28" fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div><div style="font-weight:800;font-size:.9rem;">WhatsApp Order</div><div style="font-size:.75rem;opacity:.9;">+92 300 1234567</div></div>
+        </a>
+        <a href="tel:+923001234567" class="f-call-card">
+          <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <div><div style="font-weight:700;font-size:.88rem;">Call Us</div><div style="font-size:.75rem;opacity:.7;">+92 300 1234567</div></div>
+        </a>
+        <p style="font-size:.77rem;color:var(--green);margin-top:12px;font-weight:700;">⏰ Open Daily: 11 AM – 2 AM</p>
+      </div>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <div class="container">
+      <p>© 2025 <span>Javed Food Point</span>. Tamam Haqooq Mahfooz. Made with ❤️ in Pakistan 🇵🇰</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/923001234567?text=Hi%20Javed%20Food%20Point!%20Order%20karna%20hai!%20%F0%9F%8D%94" target="_blank" class="wa-float" aria-label="Order on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-tip">Order on WhatsApp!</span>
+</a>
+
+<!-- BACK TO TOP -->
+<button id="btt" aria-label="Back to top">▲</button>
+
+<!-- Vendor Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- GSAP & ScrollTrigger (Official CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- Hero Canvas Scroll Engine -->
+<script src="hero.js"></script>
+
+<!-- Main Site Scripts -->
+<script src="script.js"></script>
+</body>
+</html>
