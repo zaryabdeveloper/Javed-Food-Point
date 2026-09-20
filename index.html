@@ -12,6 +12,10 @@
 
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="hero.css">
+
+<!-- High-Priority Preload for Instant First Paint of Hero Frame 0 (Desktop & Mobile WebP) -->
+<link rel="preload" as="image" href="burger-frames/Frame000000.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+<link rel="preload" as="image" href="burger-frames/mobile/Frame000000.webp" type="image/webp" media="(max-width: 767.98px)" fetchpriority="high">
 </head>
 <body>
 
@@ -665,17 +669,17 @@
 <!-- BACK TO TOP -->
 <button id="btt" aria-label="Back to top">▲</button>
 
-<!-- Vendor Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
 <!-- GSAP & ScrollTrigger (Official CDN) -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
-<!-- Hero Canvas Scroll Engine -->
+<!-- Hero Canvas Scroll Engine (Initializes immediately) -->
 <script src="hero.js"></script>
+
+<!-- Vendor Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <!-- Main Site Scripts -->
 <script src="script.js"></script>

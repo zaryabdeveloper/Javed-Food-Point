@@ -1,32 +1,124 @@
 /**
  * ══════════════════════════════════════════════════════════════════
- * JAVED FOOD POINT — HERO CANVAS SCROLL ENGINE
- * 101-Frame Double Smash Burger Assembly Sequence
+ * JAVED FOOD POINT — ULTRA-PERFORMANCE HERO CANVAS SCROLL ENGINE
+ * 101-Frame Gourmet Double Smash Burger Assembly Sequence
  * 
- * Tech Stack: HTML5 Canvas, GSAP 3, ScrollTrigger
+ * Performance Architecture:
+ * 1. Responsive WebP Asset Serving (Desktop 1280x720, Mobile 800x450)
+ * 2. Instant First Paint (Frame 0 Preload + HTML5 head link)
+ * 3. Connection-Aware Controlled Concurrency Pool (2 - 8 workers)
+ * 4. Direction-Aware Lookahead Priority Queue (forward vs backward scroll)
+ * 5. Nearest-Loaded Frame Fallback (Zero blank canvas, zero stutter)
+ * 6. Non-Blocking Idle-Scheduled Background Loader (requestIdleCallback)
+ * 7. Off-Main-Thread Native Image Decoding (img.decode())
+ * 8. GPU-Optimized Canvas Buffer Capping & Redundant Paint Elimination
  * ══════════════════════════════════════════════════════════════════
  */
 
 (function () {
   'use strict';
 
-  // ── CONSTANTS & CONFIGURATION ──
-  const TOTAL_FRAMES = 101; // Frame000000.png to Frame000100.png
-  const FRAME_DIR = 'burger-frames/';
+  // ── CONSTANTS & ASSET DIRECTORIES ──
+  const TOTAL_FRAMES = 101; // Frame000000 to Frame000100
+  const DESKTOP_DIR = 'burger-frames/';
+  const MOBILE_DIR = 'burger-frames/mobile/';
   const FRAME_PREFIX = 'Frame';
-  const FRAME_EXT = '.png';
+  const PRIMARY_EXT = '.webp';
+  const FALLBACK_EXT = '.png';
+
   const NATIVE_WIDTH = 1280;
   const NATIVE_HEIGHT = 720;
-  const BURGER_SUBJECT_WIDTH = 720; // Width of burger subject in frame
+  const BURGER_SUBJECT_WIDTH = 720;
 
-  // ── STATE ──
+  // ── CONNECTION-AWARE SETTINGS ──
+  function getNetworkProfile() {
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!conn) {
+      return {
+        concurrency: 6,
+        initialBuffer: 8,
+        priorityRadius: 10,
+        idleBatchSize: 4
+      };
+    }
+
+    if (conn.saveData) {
+      return {
+        concurrency: 2,
+        initialBuffer: 3,
+        priorityRadius: 4,
+        idleBatchSize: 1
+      };
+    }
+
+    const effectiveType = conn.effectiveType || '';
+    if (effectiveType === 'slow-2g' || effectiveType === '2g') {
+      return {
+        concurrency: 2,
+        initialBuffer: 3,
+        priorityRadius: 4,
+        idleBatchSize: 1
+      };
+    } else if (effectiveType === '3g') {
+      return {
+        concurrency: 4,
+        initialBuffer: 6,
+        priorityRadius: 7,
+        idleBatchSize: 2
+      };
+    } else {
+      // 4g or fast broadband
+      const downlink = conn.downlink || 10;
+      const isUltra = downlink >= 8;
+      return {
+        concurrency: isUltra ? 8 : 6,
+        initialBuffer: isUltra ? 10 : 8,
+        priorityRadius: isUltra ? 12 : 9,
+        idleBatchSize: 4
+      };
+    }
+  }
+
+  let networkProfile = getNetworkProfile();
+
+  if (navigator.connection && typeof navigator.connection.addEventListener === 'function') {
+    navigator.connection.addEventListener('change', () => {
+      networkProfile = getNetworkProfile();
+    });
+  }
+
+  // ── RESPONSIVE DETECTION ──
+  function isMobileViewport() {
+    return window.innerWidth < 768;
+  }
+
+  function getFrameUrl(index, forceFallback = false) {
+    const padded = String(index).padStart(6, '0');
+    if (forceFallback) {
+      return `${DESKTOP_DIR}${FRAME_PREFIX}${padded}${FALLBACK_EXT}`;
+    }
+    const isMobile = isMobileViewport();
+    const dir = isMobile ? MOBILE_DIR : DESKTOP_DIR;
+    return `${dir}${FRAME_PREFIX}${padded}${PRIMARY_EXT}`;
+  }
+
+  // ── STATE & CACHE ──
   const frameCache = new Array(TOTAL_FRAMES).fill(null);
+  const loadPromises = new Array(TOTAL_FRAMES).fill(null);
+  const loadingSet = new Set();
+  const priorityQueue = [];
+
   let loadedCount = 0;
   let activeFrameIndex = 0;
+  let scrollDirection = 1; // 1 = forward/down, -1 = backward/up
+  let lastRenderedImage = null;
+  let lastRenderedIndex = -1;
   let isInitialFrameRendered = false;
   let renderRafId = null;
+  let idleScheduleTimer = null;
   let scrollTriggerInstance = null;
   let isReducedMotion = false;
+  let activeWorkers = 0;
 
   // ── DOM ELEMENTS ──
   let canvas = null;
@@ -43,36 +135,34 @@
   let badge3El = null;
 
   /**
-   * Constructs the padded filename for a given 0-based frame index.
-   * e.g., 0 -> "Frame000000.png", 100 -> "Frame000100.png"
+   * Direction-aware nearest loaded frame search (Fast Scroll Fallback).
+   * If target is missing, grabs the closest frame in the direction of motion
+   * so there is zero flicker and zero blank canvas.
    */
-  function getFrameFilename(index) {
-    const padded = String(index).padStart(6, '0');
-    return `${FRAME_DIR}${FRAME_PREFIX}${padded}${FRAME_EXT}`;
-  }
-
-  /**
-   * Find the nearest available loaded frame image in cache.
-   * Prioritizes backwards search (most natural during forward scroll),
-   * then searches forward. Guarantees no blank canvas once Frame 0 loads.
-   */
-  function getNearestLoadedImage(targetIndex) {
+  function getNearestLoadedImage(targetIndex, direction = 1) {
     if (frameCache[targetIndex]) return frameCache[targetIndex];
 
-    // Search backwards
-    for (let i = targetIndex - 1; i >= 0; i--) {
-      if (frameCache[i]) return frameCache[i];
-    }
-    // Search forwards
-    for (let i = targetIndex + 1; i < TOTAL_FRAMES; i++) {
-      if (frameCache[i]) return frameCache[i];
+    const primaryDir = direction >= 0 ? -1 : 1;
+    const secondaryDir = -primaryDir;
+
+    let dist = 1;
+    while (dist < TOTAL_FRAMES) {
+      const pIdx = targetIndex + (dist * primaryDir);
+      if (pIdx >= 0 && pIdx < TOTAL_FRAMES && frameCache[pIdx]) {
+        return frameCache[pIdx];
+      }
+      const sIdx = targetIndex + (dist * secondaryDir);
+      if (sIdx >= 0 && sIdx < TOTAL_FRAMES && frameCache[sIdx]) {
+        return frameCache[sIdx];
+      }
+      dist++;
     }
     return null;
   }
 
   /**
-   * Render a specific frame to the HTML5 canvas with DPR scaling,
-   * aspect-ratio preservation (object-fit: cover logic), and centering.
+   * Render frame to canvas with DPR scaling, aspect-ratio preservation,
+   * optical centering, and redundant redraw skipping.
    */
   function drawFrame(frameIndex) {
     if (!canvas || !ctx) return;
@@ -81,36 +171,39 @@
     const ch = canvas.clientHeight;
     if (cw === 0 || ch === 0) return;
 
-    // High-DPI handling: cap at 2x for optimal mobile memory & performance
+    // High-DPI handling: cap DPR at 2x and max 1920x1080 buffer
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const targetBufferWidth = Math.round(cw * dpr);
-    const targetBufferHeight = Math.round(ch * dpr);
+    const targetBufferWidth = Math.min(Math.round(cw * dpr), 1920);
+    const targetBufferHeight = Math.min(Math.round(ch * dpr), 1080);
 
-    if (canvas.width !== targetBufferWidth || canvas.height !== targetBufferHeight) {
+    const sizeChanged = (canvas.width !== targetBufferWidth || canvas.height !== targetBufferHeight);
+    if (sizeChanged) {
       canvas.width = targetBufferWidth;
       canvas.height = targetBufferHeight;
     }
 
-    // Fill background with exact dark tone from burger frames
+    const img = getNearestLoadedImage(frameIndex, scrollDirection);
+    if (!img) return;
+
+    // Skip redundant repaints if image and canvas dimensions haven't changed
+    if (!sizeChanged && img === lastRenderedImage && frameIndex === lastRenderedIndex) {
+      return;
+    }
+
+    // Fill background with burger frame dark tone
     ctx.fillStyle = '#0F0500';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const img = getNearestLoadedImage(frameIndex);
-    if (!img) return; // Wait for at least 1 frame
-
     const iw = img.naturalWidth || NATIVE_WIDTH;
     const ih = img.naturalHeight || NATIVE_HEIGHT;
-    const imgRatio = iw / ih; // ~1.777778 (16:9)
+    const imgRatio = iw / ih;
     const canvasRatio = cw / ch;
 
     let renderW, renderH, drawX, drawY;
-
     const isLandscape = (cw > ch && ch <= 600) || cw >= 992;
 
     if (isLandscape) {
-      // ── DESKTOP & WIDE / LANDSCAPE SCREENS ──
-      // Standard object-fit: cover with right-biased focal centering
-      // so burger is visible beside left-aligned hero text.
+      // Desktop / Landscape: 62% focal anchor for burger
       if (canvasRatio > imgRatio) {
         renderW = cw;
         renderH = cw / imgRatio;
@@ -119,41 +212,40 @@
         renderW = ch * imgRatio;
       }
 
-      const horizontalCenter = cw * 0.62; // 62% focal anchor
+      const horizontalCenter = cw * 0.62;
       drawX = horizontalCenter - (renderW * 0.5);
       drawY = (ch - renderH) / 2;
     } else {
-      // ── MOBILE & TABLET PORTRAIT ──
-      // Calculate responsive scale to ensure the burger subject fits horizontally
-      // without getting clipped at screen edges, and centered in the middle visual window.
+      // Mobile / Portrait: centered between header block and actions
       const subjectFitScale = (cw * 0.90) / BURGER_SUBJECT_WIDTH;
       const fullCoverScale = Math.max(cw / iw, ch / ih);
-      
       const chosenScale = Math.min(fullCoverScale, Math.max(cw / iw, subjectFitScale));
 
       renderW = iw * chosenScale;
       renderH = ih * chosenScale;
       drawX = (cw - renderW) / 2;
-      
-      // Center burger in the optical center between header block and bottom action block
+
       const middleCenterY = ch * 0.46;
       drawY = middleCenterY - (renderH * 0.5);
     }
 
-    // Draw scaled frame to high-DPI buffer
+    const bufferScaleX = canvas.width / cw;
+    const bufferScaleY = canvas.height / ch;
+
     ctx.drawImage(
       img,
-      Math.round(drawX * dpr),
-      Math.round(drawY * dpr),
-      Math.round(renderW * dpr),
-      Math.round(renderH * dpr)
+      Math.round(drawX * bufferScaleX),
+      Math.round(drawY * bufferScaleY),
+      Math.round(renderW * bufferScaleX),
+      Math.round(renderH * bufferScaleY)
     );
 
-    activeFrameIndex = frameIndex;
+    lastRenderedImage = img;
+    lastRenderedIndex = frameIndex;
   }
 
   /**
-   * Request a canvas draw on the next animation frame to prevent redundant repaints.
+   * Request render on next animation frame to coalesce rapid scroll events.
    */
   function requestRenderFrame(frameIndex) {
     activeFrameIndex = frameIndex;
@@ -165,54 +257,100 @@
   }
 
   /**
-   * Preload a single frame and optionally decode it off the main thread.
+   * Load and decode a single frame using native off-thread decoding.
    */
   function loadFrame(index) {
-    return new Promise((resolve) => {
-      if (frameCache[index]) {
-        resolve(frameCache[index]);
-        return;
-      }
+    if (frameCache[index]) {
+      return Promise.resolve(frameCache[index]);
+    }
+    if (loadPromises[index]) {
+      return loadPromises[index];
+    }
 
+    loadingSet.add(index);
+
+    loadPromises[index] = new Promise((resolve) => {
       const img = new Image();
-      img.src = getFrameFilename(index);
+      let settled = false;
 
-      const onImageReady = async () => {
-        try {
-          if (typeof img.decode === 'function') {
-            await img.decode();
+      const finish = (success) => {
+        if (settled) return;
+        settled = true;
+        loadingSet.delete(index);
+
+        if (success) {
+          frameCache[index] = img;
+          loadedCount++;
+          handleFrameLoaded(index);
+          resolve(img);
+        } else {
+          // Automatic fallback to original PNG if WebP fails
+          if (!img._retriedFallback) {
+            img._retriedFallback = true;
+            settled = false;
+            loadingSet.add(index);
+            img.src = getFrameUrl(index, true);
+
+            if (typeof img.decode === 'function') {
+              img.decode().then(() => finish(true)).catch(() => {
+                if (img.complete && img.naturalWidth > 0) finish(true);
+                else {
+                  loadingSet.delete(index);
+                  resolve(null);
+                }
+              });
+            } else {
+              img.onload = () => finish(true);
+              img.onerror = () => {
+                loadingSet.delete(index);
+                resolve(null);
+              };
+            }
+            return;
           }
-        } catch (err) {
-          // Decode failure fallback: image is still usable via drawImage
+          resolve(null);
         }
-        frameCache[index] = img;
-        loadedCount++;
-        handleFrameLoaded(index);
-        resolve(img);
       };
 
-      img.onload = onImageReady;
-      img.onerror = () => {
-        // Resolve on error to avoid blocking the queue
-        resolve(null);
-      };
+      img.onerror = () => finish(false);
+      img.src = getFrameUrl(index);
+
+      if (typeof img.decode === 'function') {
+        img.decode()
+          .then(() => finish(true))
+          .catch(() => {
+            if (img.complete && img.naturalWidth > 0) {
+              finish(true);
+            } else {
+              img.onload = () => finish(true);
+            }
+          });
+      } else {
+        img.onload = () => finish(true);
+      }
     });
+
+    return loadPromises[index];
   }
 
   /**
-   * Called whenever a new frame finishes loading.
+   * Handler when a frame completes loading.
    */
   function handleFrameLoaded(index) {
-    // If this is Frame 0, render immediately so Canvas is never blank
+    // Instant first paint for Frame 0
     if (index === 0 && !isInitialFrameRendered) {
       isInitialFrameRendered = true;
       requestRenderFrame(0);
-    } else if (index === activeFrameIndex) {
-      // Re-render current frame if it just loaded
-      requestRenderFrame(index);
+    } else {
+      // Re-render if this newly loaded frame is the active frame
+      // or provides a closer match than what is currently painted
+      const bestImg = getNearestLoadedImage(activeFrameIndex, scrollDirection);
+      if (bestImg && bestImg !== lastRenderedImage) {
+        requestRenderFrame(activeFrameIndex);
+      }
     }
 
-    // Update loader indicator
+    // Update non-blocking progress pill
     const pct = Math.round((loadedCount / TOTAL_FRAMES) * 100);
     if (loadPctTextEl) {
       loadPctTextEl.textContent = `${pct}%`;
@@ -227,56 +365,129 @@
   }
 
   /**
-   * Smart preloader:
-   * 1. Priority 1: Frame 0 (immediate display)
-   * 2. Priority 2: Keyframes every 10 frames (enables instant rough scrubbing)
-   * 3. Priority 3: Worker queue with concurrency = 4 for remaining frames
+   * Controlled concurrency worker pool.
    */
-  async function startImagePreloader() {
-    // Step 1: Load Frame 0 immediately
-    await loadFrame(0);
+  function processQueue() {
+    const maxConcurrency = networkProfile.concurrency;
+    while (activeWorkers < maxConcurrency && priorityQueue.length > 0) {
+      const nextIdx = priorityQueue.shift();
+      if (frameCache[nextIdx] || loadingSet.has(nextIdx)) {
+        continue;
+      }
 
-    // Step 2: Keyframe indices
-    const keyframes = [];
-    for (let i = 10; i <= 100; i += 10) {
-      keyframes.push(i);
+      activeWorkers++;
+      loadFrame(nextIdx).finally(() => {
+        activeWorkers--;
+        processQueue();
+      });
+    }
+  }
+
+  /**
+   * Direction-aware priority queue manager.
+   * If scrolling DOWN, prioritizes targetFrame + lookahead forward.
+   * If scrolling UP, prioritizes targetFrame + lookahead backward.
+   */
+  function prioritizeFramesNear(targetIndex, direction = 1) {
+    const radius = networkProfile.priorityRadius;
+    const prioritized = [];
+
+    // 1. Target frame is absolute top priority
+    if (!frameCache[targetIndex] && !loadingSet.has(targetIndex)) {
+      prioritized.push(targetIndex);
     }
 
-    // Step 3: All remaining frames
-    const remainingFrames = [];
-    for (let i = 1; i < TOTAL_FRAMES; i++) {
-      if (!keyframes.includes(i)) {
-        remainingFrames.push(i);
+    // 2. Primary lookahead in scroll direction
+    for (let r = 1; r <= radius; r++) {
+      const idx = direction >= 0 ? targetIndex + r : targetIndex - r;
+      if (idx >= 0 && idx < TOTAL_FRAMES && !frameCache[idx] && !loadingSet.has(idx)) {
+        if (!prioritized.includes(idx)) prioritized.push(idx);
       }
     }
 
-    const queue = [...keyframes, ...remainingFrames];
-    const CONCURRENCY = 4; // Max concurrent network downloads
-    let activeWorkers = 0;
-    let qIndex = 0;
-
-    function processQueue() {
-      while (activeWorkers < CONCURRENCY && qIndex < queue.length) {
-        const frameIdx = queue[qIndex++];
-        activeWorkers++;
-        loadFrame(frameIdx).finally(() => {
-          activeWorkers--;
-          processQueue();
-        });
+    // 3. Secondary trailing buffer (smaller radius in reverse direction)
+    const trailingRadius = Math.min(3, Math.floor(radius / 3));
+    for (let r = 1; r <= trailingRadius; r++) {
+      const idx = direction >= 0 ? targetIndex - r : targetIndex + r;
+      if (idx >= 0 && idx < TOTAL_FRAMES && !frameCache[idx] && !loadingSet.has(idx)) {
+        if (!prioritized.includes(idx)) prioritized.push(idx);
       }
     }
+
+    if (prioritized.length === 0) return;
+
+    // Remove prioritized frames from current queue positions
+    for (let i = priorityQueue.length - 1; i >= 0; i--) {
+      if (prioritized.includes(priorityQueue[i])) {
+        priorityQueue.splice(i, 1);
+      }
+    }
+
+    // Prepend prioritized frames to front of queue
+    priorityQueue.unshift(...prioritized);
 
     processQueue();
   }
 
   /**
-   * Update text highlights, assembly progress bar, and badge states
-   * based on scroll progress (0.0 to 1.0) and frameIndex (0 to 100).
+   * Non-blocking background loader using requestIdleCallback.
+   * Loads remaining unqueued frames silently in small batches.
+   */
+  function scheduleIdleBackgroundLoading() {
+    if (loadedCount >= TOTAL_FRAMES) return;
+
+    const scheduleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 100));
+
+    scheduleCallback((deadline) => {
+      const batchSize = networkProfile.idleBatchSize;
+      let added = 0;
+
+      for (let i = 0; i < TOTAL_FRAMES; i++) {
+        if (!frameCache[i] && !loadingSet.has(i) && !priorityQueue.includes(i)) {
+          priorityQueue.push(i);
+          added++;
+          if (added >= batchSize) break;
+        }
+      }
+
+      if (added > 0) {
+        processQueue();
+      }
+
+      if (loadedCount < TOTAL_FRAMES) {
+        clearTimeout(idleScheduleTimer);
+        idleScheduleTimer = setTimeout(scheduleIdleBackgroundLoading, 300);
+      }
+    });
+  }
+
+  /**
+   * Progressive tiered preload strategy:
+   * Tier 1: Frame 0 immediate (highest priority)
+   * Tier 2: Initial window (1..initialBuffer) for instant scroll responsiveness
+   * Tier 3: Idle background schedule for the remainder
+   */
+  function startProgressivePreloader() {
+    // 1. Frame 0 immediate
+    loadFrame(0);
+
+    // 2. Initial buffer window
+    const initialBuf = networkProfile.initialBuffer;
+    for (let i = 1; i <= initialBuf && i < TOTAL_FRAMES; i++) {
+      priorityQueue.push(i);
+    }
+    processQueue();
+
+    // 3. Defer remaining sequence to idle time after initial window finishes
+    setTimeout(scheduleIdleBackgroundLoading, 400);
+  }
+
+  /**
+   * Update hero text highlights, progress bar, and badge states.
    */
   function updateHeroContent(progress, frameIndex) {
     const pct = Math.round(progress * 100);
 
-    // Update Progress Pill
     if (progressPctEl) {
       progressPctEl.textContent = `${pct}%`;
     }
@@ -284,7 +495,6 @@
       progressBarEl.style.width = `${pct}%`;
     }
 
-    // Dynamic descriptive status message
     if (progressTextEl) {
       if (frameIndex < 15) {
         progressTextEl.textContent = 'Scroll to build your burger ↓';
@@ -299,9 +509,7 @@
       }
     }
 
-    // Floating Badge Active States based on current assembly stage
     if (badge1El) {
-      // Hot & Fresh highlights when patty is sizzling (frames 15-45)
       if (frameIndex >= 15 && frameIndex <= 48) {
         badge1El.classList.add('badge-active');
       } else {
@@ -310,7 +518,6 @@
     }
 
     if (badge2El) {
-      // 100% Halal highlights when cheddar & tomatoes land (frames 45-75)
       if (frameIndex >= 45 && frameIndex <= 78) {
         badge2El.classList.add('badge-active');
       } else {
@@ -319,7 +526,6 @@
     }
 
     if (badge3El) {
-      // Fast Delivery highlights when burger is complete and ready (frames 75-100)
       if (frameIndex >= 75) {
         badge3El.classList.add('badge-active');
       } else {
@@ -329,8 +535,7 @@
   }
 
   /**
-   * Initialize GSAP ScrollTrigger for the pinned hero scrub sequence.
-   * Includes graceful retry for slow networks if GSAP CDN is still loading.
+   * Initialize GSAP ScrollTrigger sequence.
    */
   function initGSAPScrollTrigger(retryCount = 0) {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
@@ -344,14 +549,10 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Calculate responsive scroll distance
     const calculateScrollDistance = () => {
       const isMobile = window.innerWidth < 768;
-      // 1.8x viewport height on mobile, 2.2x on desktop for cinematic pacing
       return isMobile ? window.innerHeight * 1.8 : window.innerHeight * 2.2;
     };
-
-    const animState = { frame: 0 };
 
     scrollTriggerInstance = ScrollTrigger.create({
       trigger: heroSection,
@@ -360,7 +561,7 @@
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
-      scrub: 0.35, // Smooth scrub without jumping or over-lagging
+      scrub: 0.35,
       onUpdate: (self) => {
         const progress = self.progress;
         const targetFrame = Math.min(
@@ -368,7 +569,11 @@
           Math.max(0, Math.round(progress * (TOTAL_FRAMES - 1)))
         );
 
-        animState.frame = targetFrame;
+        // Direction detection: 1 = forward/down, -1 = backward/up
+        const dir = self.direction || (targetFrame >= activeFrameIndex ? 1 : -1);
+        scrollDirection = dir;
+
+        prioritizeFramesNear(targetFrame, dir);
         requestRenderFrame(targetFrame);
         updateHeroContent(progress, targetFrame);
       }
@@ -376,13 +581,13 @@
   }
 
   /**
-   * Handle resize and orientation changes cleanly.
-   * Debounces execution and calls ScrollTrigger.refresh() without duplicating triggers.
+   * Debounced resize handler to prevent layout thrashing.
    */
   let resizeTimeout = null;
   function handleResize() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
+      networkProfile = getNetworkProfile();
       requestRenderFrame(activeFrameIndex);
       if (typeof ScrollTrigger !== 'undefined' && ScrollTrigger.refresh) {
         ScrollTrigger.refresh();
@@ -391,12 +596,12 @@
   }
 
   /**
-   * Initialize the Hero Rebuild component.
+   * Initialize hero engine.
    */
   function initHero() {
     canvas = document.getElementById('hero-canvas');
     if (!canvas) return;
-    ctx = canvas.getContext('2d', { alpha: false }); // alpha: false for faster GPU rendering
+    ctx = canvas.getContext('2d', { alpha: false });
 
     heroSection = document.getElementById('hero');
     heroStage = heroSection ? heroSection.querySelector('.hero-stage') : null;
@@ -409,30 +614,50 @@
     badge2El = document.getElementById('heroBadge2');
     badge3El = document.getElementById('heroBadge3');
 
-    // Check for prefers-reduced-motion
-    isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Immediate canvas sizing & dark fill
+    const cw = canvas.clientWidth;
+    const ch = canvas.clientHeight;
+    if (cw > 0 && ch > 0) {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.min(Math.round(cw * dpr), 1920);
+      canvas.height = Math.min(Math.round(ch * dpr), 1080);
+      ctx.fillStyle = '#0F0500';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
+    // Instant First Paint: Draw Frame 0 immediately if already cached
+    if (frameCache[0]) {
+      isInitialFrameRendered = true;
+      drawFrame(0);
+    }
+
+    // prefers-reduced-motion accessibility
+    isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (isReducedMotion) {
-      // Reduced motion mode: load Frame 100 (fully assembled burger) and display statically
       loadFrame(100).then(() => {
         requestRenderFrame(100);
       });
       return;
     }
 
-    // Start preloading frames
-    startImagePreloader();
+    // Start progressive tiered preloading
+    startProgressivePreloader();
 
-    // Initialize ScrollTrigger
+    // Initialize ScrollTrigger immediately (never blocks UI)
     initGSAPScrollTrigger();
 
-    // Listen for resize and orientation change
+    // Event listeners
     window.addEventListener('resize', handleResize, { passive: true });
     window.addEventListener('orientationchange', handleResize, { passive: true });
   }
 
-  // Run when DOM is ready
-  if (document.readyState === 'loading') {
+  // Preload Frame 0 at script evaluation time
+  loadFrame(0);
+
+  // Initialize as soon as DOM is ready
+  if (document.getElementById('hero-canvas')) {
+    initHero();
+  } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initHero);
   } else {
     initHero();
